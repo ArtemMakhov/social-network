@@ -1,4 +1,5 @@
-import { Route,Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import { GlobalStyle } from './components/GlobalStyle';
 import './App.css';
 import Dialogs from './components/Dialogs/Dialogs';
 import Header  from './components/Header/Header';
@@ -12,20 +13,20 @@ const App = () => {
   return (
    
     <div className='app-wrapper'>
-      <Header/>
+      <Header />
       <Navbar />
       
-        <div className='content'>
-          <Routes>
-            <Route path='/profile' element={<Profile/>} />
+      <div className='content'>
+        <Routes>
+          <Route path='/profile' element={<Profile />} />
           <Route path='/dialog' element={<Dialogs />} />
-          <Route path='/news' element={ <News/>} />
+          <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
-          <Route path='/settings' element={ <Settings/>} />
-          </Routes>
+          <Route path='/settings' element={<Settings />} />
+        </Routes>
       </div>
-
-      </div>
+      <GlobalStyle />
+    </div>
      
   );
 };
