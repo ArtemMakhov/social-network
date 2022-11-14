@@ -1,8 +1,11 @@
- const Header = () => {
+import { HeaderWrapper } from "./Header.styled";
+
+
+const Header = () => {
     return (
-        <header className='header'>
-        <img src='https://w7.pngwing.com/pngs/567/579/png-transparent-logo-emblem-brand-design-emblem-text-team.png' width="30" height="30"/>
-      </header>
+      <HeaderWrapper>
+        <img src='https://www.svgrepo.com/show/102959/baidu-logo.svg' alt="logo" width="30" height="30"/>
+      </HeaderWrapper>
     )
 }
 

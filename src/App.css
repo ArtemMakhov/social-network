@@ -12,15 +12,6 @@
   /* grid-gap: 10px; */
 }
 
-.header {
-  grid-area: h;
-  background-color: rgba(83, 199, 20, 0.949);
-}
-
-.nav {
-  grid-area: n;
-  background-color: rgb(47, 116, 255);
-}
 
 .content {
   grid-area: c;

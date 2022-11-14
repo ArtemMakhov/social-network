@@ -1,14 +1,15 @@
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
+import { Navigate,NavigateList } from "./Navbar.styled";
 
 const Navbar = () => {
     return (
-        <nav className='nav'>
-            <div><NavLink to="/profile">Profile</NavLink></div>
-            <div><NavLink to="/dialog">Messages</NavLink></div>
-            <div><NavLink to="/news">News</NavLink></div>
-            <div><NavLink to="/music">Music</NavLink></div>
-            <div><NavLink to="/settings">Settings</NavLink></div>
-        </nav>
+        <Navigate>
+            <div><NavigateList to="/profile">Profile</NavigateList></div>
+            <div><NavigateList to="/dialog">Messages</NavigateList></div>
+            <div><NavigateList to="/news">News</NavigateList></div>
+            <div><NavigateList to="/music">Music</NavigateList></div>
+            <div><NavigateList to="/settings">Settings</NavigateList></div>
+        </Navigate>
     )
 };
 
