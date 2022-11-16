@@ -1,13 +1,13 @@
-// import s from './MyPosts.module.css';
 import Post from './Post/Post';
+import { Title,Button } from './MyPosts.styled';
 
 const MyPosts = () => {
     return (
         <div >
-            My post
+            <Title>My post</Title>
             <div>
-                <textarea></textarea>
-                <button>Add post</button>
+                <div><textarea></textarea></div>
+                <Button>Add post</Button>
             </div>
             <div >
                 <Post message="Hi, how are you?" like="20"/>
