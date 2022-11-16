@@ -11,9 +11,9 @@ export const Contact = styled(NavLink)`
   
   text-decoration: none;
   color: black;
-  &.active{
+  /* &.active{
     color: #e2df2b;
-  }
+  } */
 `
 
 export const MessageItem = styled.div`
