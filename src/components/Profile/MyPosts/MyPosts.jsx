@@ -1,13 +1,9 @@
 import Post from './Post/Post';
 import { Title,Button } from './MyPosts.styled';
 
-const MyPosts = () => {
-    let postsData = [
-        { id: 1, message: "Hi, how are you?", like: 20 },
-        { id: 2, message: "It's my first post", like: 12 },
+const MyPosts = ({postsData}) => {
 
-    ];
-    let posts = postsData.map(post => <Post message={post.message} like={post.like} />)
+    let posts = postsData.map(post => <Post id={post.id} message={post.message} like={post.like} />)
     return (
         <div >
             <Title>My post</Title>
@@ -15,11 +11,11 @@ const MyPosts = () => {
                 <div><textarea></textarea></div>
                 <Button>Add post</Button>
             </div>
-            <div >
+            <ul >
  
                 {posts}
 
-            </div>
+            </ul>
         </div>
     )
 };
