@@ -8,6 +8,7 @@ export const Navigate = styled.nav`
 export const NavigateList = styled(NavLink)`
     text-decoration: none;
     color: white;
+    margin-left: 10px;
 
 &.active {
     color: #1ad7d7;

@@ -1,19 +1,21 @@
 import Post from './Post/Post';
 import { Title,Button } from './MyPosts.styled';
 
-const MyPosts = ({postsData}) => {
+const MyPosts = ({posts}) => {
 
-    let posts = postsData.map(post => <Post id={post.id} message={post.message} like={post.like} />)
+    let userPost = posts.map(post => <Post avatar={post.avatar} message={post.message} like={post.like} />)
     return (
         <div >
             <Title>My post</Title>
             <div>
-                <div><textarea></textarea></div>
+                <div>
+                    <textarea></textarea>
+                </div>
                 <Button>Add post</Button>
             </div>
             <ul >
  
-                {posts}
+                {userPost}
 
             </ul>
         </div>
