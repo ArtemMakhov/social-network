@@ -1,9 +1,14 @@
-import { Contact } from './Dialog.styled';
+import { Contact,Img } from './Dialog.styled';
+import { Box } from '../../Box';
 
-
-export const Dialog = ({ name, id }) => {
+export const Dialog = ({ name, avatar,id }) => {
 
     return (
-        <div><Contact to={id}>{name}</Contact></div>
+        <Box m="10px">
+            <Contact to={id}>
+                <Img src={avatar} alt="avatar" width="50" height="50" />
+                {name}
+            </Contact>
+        </Box>
     )
 };

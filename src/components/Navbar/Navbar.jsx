@@ -9,6 +9,7 @@ const Navbar = () => {
             <div><NavigateList to="/news">News</NavigateList></div>
             <div><NavigateList to="/music">Music</NavigateList></div>
             <div><NavigateList to="/settings">Settings</NavigateList></div>
+            <div><NavigateList to="/friends">Friends</NavigateList></div>
         </Navigate>
     )
 };
