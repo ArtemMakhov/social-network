@@ -10,8 +10,7 @@ import Settings from './components/UserSettings/Settings';
 import { Wrapper,Content } from './App.styled';
 
 
-const App = (props) => {
-  
+const App = ({state}) => {
   return (
    
     <Wrapper>
@@ -20,8 +19,8 @@ const App = (props) => {
       
       <Content>
         <Routes>
-          <Route path='/profile' element={<Profile posts={props.posts} />} />
-          <Route path='/dialog/*' element={<Dialogs dialogsData={props.dialogsData} messagesData={props.messagesData} />} />
+          <Route path='/profile' element={<Profile state={state.profilePage} />} />
+          <Route path='/dialog/*' element={<Dialogs state={state.dialogPage}  />} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />

@@ -3,22 +3,20 @@ import { Dialog } from './Dialog/Dialog';
 import { Message } from "./Message/Message";
 
 
-const Dialogs = ({ dialogsData, messagesData }) => {
+const Dialogs = ({state}) => {
 
- 
-    let dialogs = dialogsData.map(dialog => <Dialog name={dialog.name} id={dialog.id} />);
-    let messages = messagesData.map(message => <Message message={message.message} />);
+    let userDialogs = state.dialogs.map(dialog => <Dialog name={dialog.name} id={dialog.id} />);
+    let userMessages = state.messages.map(message => <Message message={message.message} />);
     
-  
     return (
         
         <Wrapper>
             
             <div>
-                {dialogs}
+                {userDialogs}
             </div>
             <div>
-                {messages}
+                {userMessages}
             </div>
            
         </Wrapper>
