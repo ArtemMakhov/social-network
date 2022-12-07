@@ -5,3 +5,10 @@ export const HeaderWrapper = styled.header`
   background-color: rgba(83, 199, 20, 0.949);
 
 `;
+
+
+export const Logo = styled.img`
+  width: 40px;
+  height: 40px;
+  
+`

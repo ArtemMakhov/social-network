@@ -27,6 +27,7 @@ let state = {
             { id: nanoid(), message: "Yo" },
         ],
     },
+    navbar:{},
 };
 
 export default state;
