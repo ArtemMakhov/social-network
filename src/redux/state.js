@@ -1,5 +1,8 @@
 import { nanoid } from 'nanoid';
-import { rerenderEntireTree } from '../render';
+
+let rerenderEntireTree = () => {
+    console.log('State  changed');
+}
 
 let state = {
     profilePage: {
@@ -63,6 +66,10 @@ export const updateNewMessageText = (newText) => {
  
     state.dialogPage.newMessageText = newText;
     rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;
 }
 
 // avatar: "https://cdn.vox-cdn.com/thumbor/LWlI3ImRc5l27CTiBR7ihrPq6RU=/0x0:1080x718/1400x933/filters:focal(477x288:649x460):no_upscale()/cdn.vox-cdn.com/uploads/chorus_image/image/71263353/300017093_10114630004939621_5854109382330704814_n.0.jpg"
