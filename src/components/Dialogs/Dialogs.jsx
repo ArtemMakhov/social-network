@@ -4,15 +4,21 @@ import { Dialog } from './Dialog/Dialog';
 import { Message } from "./Message/Message";
 
 
-const Dialogs = ({ state }) => {
+const Dialogs = (props) => {
 
-    let userDialogs = state.dialogs.map(dialog => <Dialog name={dialog.name} avatar={dialog.avatar} id={dialog.id} />);
-    let userMessages = state.messages.map(message => <Message message={message.message} />);
+    let userDialogs = props.state.dialogs.map(dialog => <Dialog name={dialog.name} avatar={dialog.avatar} id={dialog.id} />);
+    let userMessages = props.state.messages.map(message => <Message message={message.message} />);
     
     const newMassagePost = React.createRef();
+    
     const newMassage = () => {
-        let massage = newMassagePost.current.value;
-        alert(massage)
+        props.addMessage();
+        
+    }
+
+       const  onMessageChange = () => {
+        let text = newMassagePost.current.value;
+        props.updateNewMessageText(text)
     }
 
     return (
@@ -27,7 +33,12 @@ const Dialogs = ({ state }) => {
             </div>
             
             <div>
-                <div><textarea ref={newMassagePost}></textarea></div>
+                <div>
+                    <textarea
+                    onChange={onMessageChange}
+                    ref={newMassagePost}
+                    value={props.state.newMessageText} />
+                </div>
             
            
                 <button onClick={newMassage} >massage</button>

@@ -2,22 +2,30 @@ import React from 'react';
 import Post from './Post/Post';
 import { Title,Button } from './MyPosts.styled';
 
-const MyPosts = ({posts}) => {
 
-    let userPost = posts.map(post => <Post avatar={post.avatar} message={post.message} like={post.like} />)
+const MyPosts = (props) => {
 
-    const newPostElement = React.createRef();
-    const addPost = () => { 
+    let userPost = props.posts.map(post => <Post  message={post.message} like={post.like} />)
+
+    let newPostElement = React.createRef();
+   
+    let addPost = () => {
+        props.addPost();
+    }
+    let onPostChange = () => {
         let text = newPostElement.current.value;
-        alert(text)
-     };
+        props.updateNewPostText(text)
+    }
+
+   
 
     return (
         <div >
             <Title>My post</Title>
+   
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={ props.newPostText} />
                 </div>
                 <Button onClick={addPost}>Add post</Button>
             </div>

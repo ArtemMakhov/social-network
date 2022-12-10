@@ -11,7 +11,8 @@ import Friends from './components/Friends/Friends';
 import { Wrapper,Content } from './App.styled';
 
 
-const App = ({state}) => {
+
+const App = ({state, addPost,updateNewPostText,addMessage,updateNewMessageText}) => {
   return (
    
     <Wrapper>
@@ -20,12 +21,23 @@ const App = ({state}) => {
       
       <Content>
         <Routes>
-          <Route path='/profile' element={<Profile state={state.profilePage} />} />
-          <Route path='/dialog/*' element={<Dialogs state={state.dialogPage}  />} />
+          <Route path='/profile' element={
+            <Profile
+              profilePage={state.profilePage}
+              addPost={addPost}
+              updateNewPostText={updateNewPostText}
+            />}
+          />
+          <Route path='/dialog/*' element={
+            <Dialogs
+              state={state.dialogPage}
+              addMessage={addMessage}
+              updateNewMessageText={updateNewMessageText}
+            />} />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
-          <Route path='/friends' element={<Friends /> } />
+          <Route path='/friends' element={<Friends />} />
         </Routes>
       </Content>
       <GlobalStyle />
