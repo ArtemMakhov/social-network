@@ -7,9 +7,9 @@ import App from './App';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import reportWebVitals from './reportWebVitals';
-import state from './redux/state';
+import store from './redux/state';
 
-import { addPost,updateNewPostText,addMessage,updateNewMessageText,subscribe } from './redux/state';
+
 
 
 
@@ -19,13 +19,13 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
     root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={theme}> 
                     <App
                         state={state}
-                        addPost={addPost}
-                        updateNewPostText={updateNewPostText}
-                        addMessage={addMessage}
-                        updateNewMessageText={updateNewMessageText}
+                        addPost={store.addPost.bind(store)}
+                        updateNewPostText={store.updateNewPostText.bind(store)}
+                        addMessage={store.addMessage.bind(store)}
+                        updateNewMessageText={store.updateNewMessageText.bind(store)}
                     />
       </ThemeProvider>
     </BrowserRouter>
@@ -34,9 +34,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 }
 
 
-rerenderEntireTree(state);
+rerenderEntireTree(store.getState());
 
-subscribe(rerenderEntireTree);
+store.subscribe(rerenderEntireTree);
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(
