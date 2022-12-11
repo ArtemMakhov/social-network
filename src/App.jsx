@@ -12,28 +12,20 @@ import { Wrapper,Content } from './App.styled';
 
 
 
-const App = ({state, addPost,updateNewPostText,addMessage,updateNewMessageText}) => {
+const App = ({state, dispatch}) => {
   return (
    
     <Wrapper>
       <Header />
       <Navbar />
-      
       <Content>
         <Routes>
           <Route path='/profile' element={
-            <Profile
-              profilePage={state.profilePage}
-              addPost={addPost}
-              updateNewPostText={updateNewPostText}
-            />}
+            <Profile profilePage={state.profilePage} dispatch={dispatch} />}
           />
           <Route path='/dialog/*' element={
-            <Dialogs
-              state={state.dialogPage}
-              addMessage={addMessage}
-              updateNewMessageText={updateNewMessageText}
-            />} />
+            <Dialogs state={state.dialogPage} dispatch={dispatch} />}
+          />
           <Route path='/news' element={<News />} />
           <Route path='/music' element={<Music />} />
           <Route path='/settings' element={<Settings />} />
