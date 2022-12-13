@@ -3,8 +3,18 @@ import { nanoid } from 'nanoid';
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
+const initialState = {
+    posts: [
+        { id: nanoid(), message: "Hi, how are you?", like: 20 },
+        { id: nanoid(), message: "It's my first post", like: 12 },
+        { id: nanoid(), message: "Hi!", like: 8 },
+        { id: nanoid(), message: "How are you?", like: 23 },
 
-const profileReduser = (state, action) => {
+    ],
+    newPostText: 'it-camasutra.com'
+};
+
+const profileReduser = (state = initialState, action) => {
      
     switch (action.type) {
         case ADD_POST:

@@ -1,7 +1,7 @@
 import React from 'react';
 import Post from './Post/Post';
 import { Title,Button } from './MyPosts.styled';
-import { addPostActionCreator, updateNewPostActionCreator } from '../../../redux/profile-reduser';
+// import { addPostActionCreator, updateNewPostActionCreator } from '../../../redux/profile-reduser';
 
 
 
@@ -10,14 +10,15 @@ const MyPosts = (props) => {
 
     const userPost = props.posts.map(post => <Post message={post.message} like={post.like} />);
  
-    const addPost = () => {
-        props.dispatch(addPostActionCreator());
+    const onAddPost = () => {
+        props.addPost();
     };
     
     const onPostChange = (e) => {
         const text = e.target.value;
-        const action = updateNewPostActionCreator(text)
-        props.dispatch(action);
+        props.updateNewPostText(text);
+        // const action = updateNewPostActionCreator(text)
+        // props.dispatch(action);
     };
 
     return (
@@ -28,7 +29,7 @@ const MyPosts = (props) => {
                 <div>
                     <textarea onChange={onPostChange} value={props.newPostText} />
                 </div>
-                <Button onClick={addPost}>Add post</Button>
+                <Button onClick={onAddPost}>Add post</Button>
             </div>
             <ul >
  

@@ -7,7 +7,7 @@ import App from './App';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import reportWebVitals from './reportWebVitals';
-import store from './redux/state';
+import store from './redux/redux-store';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,7 +17,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
      <React.StrictMode>
        <BrowserRouter>
          <ThemeProvider theme={theme}>
-           <App state={state} dispatch={store.dispatch.bind(store)} />
+           <App
+             store={store}
+             state={state}
+             dispatch={store.dispatch.bind(store)}
+           />
          </ThemeProvider>
        </BrowserRouter>
      </React.StrictMode>
@@ -27,7 +31,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 rerenderEntireTree(store.getState());
 
-store.subscribe(rerenderEntireTree);
+store.subscribe(() => {
+  const state = store.getState();
+  rerenderEntireTree(state);
+});
 
 
 reportWebVitals();
