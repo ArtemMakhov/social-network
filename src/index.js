@@ -11,30 +11,23 @@ import reportWebVitals from './reportWebVitals';
 import store from './redux/redux-store';
 
 
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
- let rerenderEntireTree = () => {
-   root.render(
-     <React.StrictMode>
-       <BrowserRouter>
-         <ThemeProvider theme={theme}>
-           <Provider store={store}>
-             <App />
-           </Provider>
-         </ThemeProvider>
-       </BrowserRouter>
-     </React.StrictMode>
-   );
-}
+root.render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </ThemeProvider>
+    </BrowserRouter>
+  </React.StrictMode>
+);
 
 
-rerenderEntireTree();
 
-store.subscribe(() => {
-  rerenderEntireTree();
-});
+
 
 
 reportWebVitals();
