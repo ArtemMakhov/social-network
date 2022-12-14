@@ -5,12 +5,13 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import { ThemeProvider } from 'styled-components';
+import { Provider } from 'react-redux';
 import { theme } from './theme';
 import reportWebVitals from './reportWebVitals';
 import store from './redux/redux-store';
 
 
-import {Provider} from './StoreContext'
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
