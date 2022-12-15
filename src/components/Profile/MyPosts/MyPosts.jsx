@@ -8,7 +8,7 @@ import { Title,Button } from './MyPosts.styled';
 
 const MyPosts = (props) => {
 
-    const userPost = props.posts.map(post => <Post message={post.message} like={post.like} />);
+    const userPost = props.posts.map(post => <Post key={post.id} message={post.message} like={post.like} />);
  
     const onAddPost = () => {
         props.addPost();
