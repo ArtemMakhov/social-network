@@ -3,14 +3,19 @@ import userPhoto from '../../images/avatar.png';
 const Users = (props) => {
     const baseUrl = "https://social-network.samuraijs.com/api/1.0/users";
 
-    if (props.users.length === 0) {
+    const getUsers = () => {
+            if (props.users.length === 0) {
          axios.get(baseUrl).then(responce =>
             props.setUsers(responce.data.items)
         );
        
 }
+    }
+
+
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {props.users.map(user =>
                 <div key={user.id}>
                     <span>
