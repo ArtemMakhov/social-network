@@ -43,7 +43,7 @@ const usersReduser = (state = initialState, action) => {
 
 };
 
-export const setUsersActionCreator = (user) => ({ type: SET_USERS, user });
+export const setUsersActionCreator = (users) => ({ type: SET_USERS, users });
 export const followActionCreator = (userId) => ({ type: FOLLOW, userId });
 export const unfollowActionCreator = (userId) => ({ type: UNFOLLOW ,userId});
 

@@ -12,8 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setUser: (userId) => {
-            dispatch(setUsersActionCreator(userId));
+        setUsers: (user) => {
+            dispatch(setUsersActionCreator(user));
         },
         follow: (userId) => {
             dispatch(followActionCreator(userId));

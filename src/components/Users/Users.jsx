@@ -1,23 +1,25 @@
-// import { nanoid } from 'nanoid';
-
+import axios from 'axios';
+import userPhoto from '../../images/avatar.png';
 const Users = (props) => {
+    const baseUrl = "https://social-network.samuraijs.com/api/1.0/users";
 
-//     if (props.users.length === 0) {
-//         props.setUsers(
-//             users : [
-//         { id: nanoid(), avatar: 'https://ionicframework.com/docs/img/demos/avatar.svg', followed: false, fullName: 'Dmitry', status: 'I am a boss', location: { city: 'Minsk', country: 'Belarus' } },
-//         { id: nanoid(),avatar:'https://ionicframework.com/docs/img/demos/avatar.svg',followed:true, fullName: 'Artem', status: 'I am student', location: { city: 'Kharkov', country: 'Ukraine' } },
-//         { id: nanoid(),avatar:'https://ionicframework.com/docs/img/demos/avatar.svg',followed:false, fullName: 'Evgeniy', status: 'Petuh gamburgskiy', location: { city: 'Toronto', country: 'Canada' } },
-//         { id: nanoid(),avatar:'https://ionicframework.com/docs/img/demos/avatar.svg',followed:false, fullName: 'Ruslan', status: 'I am friendly', location: { city: 'Kiev', country: 'Ukraine' } },
-//         { id: nanoid(),avatar:'https://ionic framework.com/docs/img/demos/avatar.svg',followed:true, fullName: 'Sveta', status: 'I am a women', location: { city: 'Dnipro', country: 'Ukraine' } },])
-// }
+    if (props.users.length === 0) {
+         axios.get(baseUrl).then(responce =>
+            props.setUsers(responce.data.items)
+        );
+       
+}
     return (
         <div>
             {props.users.map(user =>
                 <div key={user.id}>
                     <span>
                         <div>
-                            <img src={ user.avatar} alt="avatar"  width="50" height="50"/>
+                            <img src={user.photos.small !== null
+                                ? user.photos.small
+                                : userPhoto}
+                                alt="avatar" width="50" height="50"
+                            />
                         </div>
                         <div>
                             {user.followed
@@ -27,12 +29,12 @@ const Users = (props) => {
                     </span>
                     <span>
                         <span>
-                            <div>{user.fullName}</div>
+                            <div>{user.name}</div>
                             <div>{user.status}</div>
                         </span>
                         <span>
-                            <div>{user.location.country}</div>
-                            <div>{user.location.city}</div>
+                            <div>{"user.location.country"}</div>
+                            <div>{"user.location.city"}</div>
                         </span>
                     </span>
                 </div>
