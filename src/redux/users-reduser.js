@@ -1,5 +1,3 @@
-// import { nanoid } from 'nanoid';
-
 const SET_USERS = "SET_USERS";
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
