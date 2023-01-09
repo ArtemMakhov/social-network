@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import userPhoto from '../../images/avatar.png';
 import { Selected } from './Users.styled';
 
@@ -23,11 +24,13 @@ let slicedPages = pages.slice( curPF, curPL);
                 <div key={user.id}>
                     <span>
                         <div>
+                            <NavLink to={`/profile/${user.id}`}>
                             <img src={user.photos.small !== null
                                 ? user.photos.small
                                 : userPhoto}
                                 alt="avatar" width="50" height="50"
-                            />
+                                />
+                                </NavLink>
                         </div>
                         <div>
                             {user.followed
