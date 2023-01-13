@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './components/GlobalStyle';
-import Header  from './components/Header/Header';
+// import Header  from './components/Header/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import News from './components/News/News';
@@ -16,7 +17,7 @@ const App = () => {
   return (
    
     <Wrapper>
-      <Header />
+      <HeaderContainer />
       <Navbar />
       <Content>
         <Routes>

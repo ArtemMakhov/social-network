@@ -1,10 +1,13 @@
-import { HeaderWrapper,Logo } from "./Header.styled";
+import { HeaderWrapper,Logo,LoginBlock,Login } from "./Header.styled";
 
 
-const Header = () => {
+const Header = (props) => {
     return (
       <HeaderWrapper>
         <Logo src='https://www.svgrepo.com/show/102959/baidu-logo.svg' alt="logo" />
+        <LoginBlock>
+         {props.isAuth ? props.login :  <Login to={'/login'}>Login</Login>}
+        </LoginBlock>
       </HeaderWrapper>
     )
 }
