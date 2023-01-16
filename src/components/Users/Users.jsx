@@ -1,67 +1,60 @@
 import { NavLink } from 'react-router-dom';
 import userPhoto from '../../images/avatar.png';
 import { Selected } from './Users.styled';
-import axios from 'axios';
+import { userApi } from '../../api/api';
 
 export const Users = (props) => {
-          let pagesCount =  Math.ceil(props.totalUsersCount / props.pageSize);
+    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
 
-        let pages = [];
-        for (let i = 1; i <= pagesCount; i++){
-            pages.push(i);
-  }
-let curP = props.currentPage;
-let curPF = ((curP - 5) < 0) ?  0  : curP - 5 ;
-let curPL = curP + 5;
-let slicedPages = pages.slice( curPF, curPL);
-  return (
-    <div>
-          <div>
-              {slicedPages.map(p => {
-               return  <Selected onClick={()=> {props.onPageChanged(p)}}>{p}</Selected>
-             })}
-          </div>
+    let pages = [];
+    for (let i = 1; i <= pagesCount; i++) {
+        pages.push(i);
+    }
+    let curP = props.currentPage;
+    let curPF = ((curP - 5) < 0) ? 0 : curP - 5;
+    let curPL = curP + 5;
+    let slicedPages = pages.slice(curPF, curPL);
+    return (
+        <div>
+            <div>
+                {slicedPages.map(p => {
+                    return <Selected onClick={() => { props.onPageChanged(p) }}>{p}</Selected>
+                })}
+            </div>
             {props.users.map(user =>
                 <div key={user.id}>
                     <span>
                         <div>
                             <NavLink to={`/profile/${user.id}`}>
-                            <img src={user.photos.small !== null
-                                ? user.photos.small
-                                : userPhoto}
-                                alt="avatar" width="50" height="50"
+                                <img src={user.photos.small !== null
+                                    ? user.photos.small
+                                    : userPhoto}
+                                    alt="avatar" width="50" height="50"
                                 />
-                                </NavLink>
+                            </NavLink>
                         </div>
                         <div>
                             {user.followed
-                                ? <button onClick={() => {
-                                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                                        {
-                                            withCredentials: true,
-                                            headers: {
-                                            'API-KEY': '38219c4f-948f-4b48-99d7-ad1ca264529e'
-                                        }})
-                                        .then(responce => {
-                                            if (responce.data.resultCode === 0) {
+                                ? <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true,user.id);
+                                    userApi.followUser(user.id)
+                                        .then(data => {
+                                            if (data.resultCode === 0) {
                                                 props.unfollow(user.id)
                                             }
+                                            props.toggleFollowingProgress(false,user.id);
                                         })
                                     props.unfollow(user.id)
                                 }}>Unfollow</button>
-                                : <button onClick={() => {
-                                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-                                        {}, {
-                                            withCredentials: true,
-                                                                                        headers: {
-                                            'API-KEY': '38219c4f-948f-4b48-99d7-ad1ca264529e'
-                                        }
-                                    })
-                                        .then(responce => {
-                                            if (responce.data.resultCode === 0) {
+                                : <button disabled={props.followingInProgress.some(id => id === user.id)} onClick={() => {
+                                    props.toggleFollowingProgress(true , user.id);
+                                userApi.unfollowUser(user.id)
+                                        .then(data => {
+                                            if (data.resultCode === 0) {
                                                 props.follow(user.id)
                                             }
-                                        }); 
+                                            props.toggleFollowingProgress(false,user.id);
+                                        });
                                     props.follow(user.id)
                                 }}>Follow</button>}
                         </div>
@@ -79,5 +72,5 @@ let slicedPages = pages.slice( curPF, curPL);
                 </div>
             )}
         </div>
-  )
+    );
 };
