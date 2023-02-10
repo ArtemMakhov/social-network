@@ -11,7 +11,7 @@ import Friends from './components/Friends/Friends';
 import { Wrapper,Content } from './App.styled';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
-
+import Login from './components/Login/Login';
 
 const App = () => {
   return (
@@ -24,6 +24,7 @@ const App = () => {
           <Route path='/profile' element={<ProfileContainer />}>
             <Route path=":userId" element={<ProfileContainer />} />
           </Route>
+          <Route path='/login' element={<Login/>} />
           <Route path='/dialog/*' element={<DialogsContainer />} />
           <Route path='/users' element={<UsersContainer/>} />
           <Route path='/news' element={<News />} />

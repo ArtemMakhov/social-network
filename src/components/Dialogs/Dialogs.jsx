@@ -19,6 +19,7 @@ const Dialogs = (props) => {
         props.messageChange(text);
     };
 
+
     return (
         
         <Wrapper>
