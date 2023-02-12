@@ -1,9 +1,10 @@
 import { nanoid } from 'nanoid';
-import { userApi } from '../api/api';
+import { userApi, profileAPI } from '../api/api';
 
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const SET_STATUS = 'SET_STATUS';
 
 const initialState = {
     posts: [
@@ -15,6 +16,7 @@ const initialState = {
     ],
     newPostText: 'it-camasutra.com',
     profile: null,
+    status: '',
 };
 
 const profileReduser = (state = initialState, action) => {
@@ -43,6 +45,11 @@ const profileReduser = (state = initialState, action) => {
             return {
                 ...state,
                 profile: action.profile,
+            };
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status,
             }
 
 
@@ -53,11 +60,25 @@ const profileReduser = (state = initialState, action) => {
 
 export const addPostActionCreator = () => ({ type: ADD_POST });
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
+export const setStatus = (status) => ({ type: SET_STATUS, status });
 
 export const getUserProfile = (userId) => (dispatch) => { 
-        userApi.getProfile(userId).then(responce => {
-                dispatch(setUserProfile(responce.data))  
-            });
+    userApi.getProfile(userId).then(responce => {
+        dispatch(setUserProfile(responce.data))  
+    });
+}
+
+export const getStatus = (userId) => (dispatch) => {
+    profileAPI.getStatus(userId).then(responce => {
+        dispatch(setStatus(responce.data));
+    });
+}
+export const updateStatus = (status) => (dispatch) => {
+    profileAPI.updateStatus(status).then(responce => {
+        if (responce.data.resultCode === 0) {
+            dispatch(setStatus(responce.data));
+        }
+    });
 }
 
 export const updateNewPostActionCreator = (text) => ({ type: UPDATE_NEW_POST_TEXT, newText: text });
