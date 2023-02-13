@@ -6,14 +6,14 @@ import usersReduser from "./users-reduser";
 import authReduser from './auth-raduser';
 import thunkMiddleware from 'redux-thunk';
 
+
 let redusers = combineReducers({
 
     profilePage: profileReduser,
     dialogPage: dialogsReduser,
     sidebar: sidebarReduser,
     usersPage: usersReduser,
-    auth: authReduser,
-    
+    auth: authReduser,    
 });
 
 let store = createStore(redusers, applyMiddleware(thunkMiddleware));

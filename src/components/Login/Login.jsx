@@ -1,9 +1,14 @@
-
+import LoginForm from "./LoginForm";
 
 const Login = (props) => {
+  const onSubmit = (formData) => {
+    console.log(formData)
+  };
+  
   return (
     <>
-      <h1>LOGIN</h1>
+      <h1>Login</h1>
+      <LoginForm onSubmit={onSubmit} />
     </>
   )
 }
