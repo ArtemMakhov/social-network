@@ -9,9 +9,6 @@ const LoginForm = (props) => {
       rememberMe: false,
     },
     onSubmit: props.onSubmit,
-    // onSubmit: values => {
-    //   alert(JSON.stringify(values, null, 2));
-    // },
   })
   return (
     <form onSubmit={formik.handleSubmit}>

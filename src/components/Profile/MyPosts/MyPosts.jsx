@@ -1,35 +1,23 @@
 import React from 'react';
 import Post from './Post/Post';
-import { Title,Button } from './MyPosts.styled';
-// import { addPostActionCreator, updateNewPostActionCreator } from '../../../redux/profile-reduser';
-
-
+import { Title } from './MyPosts.styled';
+import PostsForm from './PostsForm';
 
 
 const MyPosts = (props) => {
 
     const userPost = props.posts.map(post => <Post key={post.id} message={post.message} like={post.like} />);
  
-    const onAddPost = () => {
-        props.addPost();
+    const onSubmit = (values) => {
+          props.addPost(values.post);
     };
     
-    const onPostChange = (e) => {
-        const text = e.target.value;
-        props.updateNewPostText(text);
-        // const action = updateNewPostActionCreator(text)
-        // props.dispatch(action);
-    };
-
     return (
         <div >
             <Title>My post</Title>
    
             <div>
-                <div>
-                    <textarea onChange={onPostChange} value={props.newPostText} />
-                </div>
-                <Button onClick={onAddPost}>Add post</Button>
+                <PostsForm onSubmit={onSubmit} />
             </div>
             <ul >
  

@@ -1,7 +1,6 @@
 import { nanoid } from 'nanoid';
 
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 const initialState = {
             dialogs: [
@@ -18,7 +17,6 @@ const initialState = {
                 { id: nanoid(), message: "Hi!" },
                 { id: nanoid(), message: "Yo" },
             ],
-            newMessageText: 'qwe'
         }
 
 
@@ -28,28 +26,16 @@ const dialogsReduser = (state = initialState, action) => {
         case ADD_MESSAGE:
             let newMessage = {
                 id: nanoid(),
-                message: state.newMessageText,
+                message: action.newMessageText,
             };
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
-                newMessageText: ''
-            };
-    
-         
-        
-
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newText
-            };
-            
+            };            
         default: return state;
     }
 };
 
-export const addMessageActionCreator = () => ({ type: ADD_MESSAGE });
-export const updateNewMessageActionCreator = (text) => ({ type: UPDATE_NEW_MESSAGE_TEXT, newText: text });
+export const addMessageActionCreator = (newMessageText) => ({ type: ADD_MESSAGE,newMessageText });
 
 export default dialogsReduser;
