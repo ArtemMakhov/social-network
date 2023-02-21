@@ -6,7 +6,9 @@ const Header = (props) => {
       <HeaderWrapper>
         <Logo src='https://www.svgrepo.com/show/102959/baidu-logo.svg' alt="logo" />
         <LoginBlock>
-         {props.isAuth ? props.login :  <Login to={'/login'}>Login</Login>}
+          {props.isAuth
+            ? <div>{ props.login} - <button onClick={props.logout}>Log out</button></div>
+            : <Login to={'/login'}>Login</Login>}
         </LoginBlock>
       </HeaderWrapper>
     )
