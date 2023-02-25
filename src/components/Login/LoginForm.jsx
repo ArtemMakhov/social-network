@@ -27,26 +27,28 @@ const FormError = ({ name }) => {
 }
 
 const LoginForm = (props) => {
-  // const handleSubmit = (values, {resetForm}) => {
-  //   console.log(values);
-  //   resetForm();
-  // }
+
   return (
-    <Formik initialValues={initiaValues} onSubmit={props.handleSubmit} validationSchema={LoginSchema}>
-      <Form autoComplete='off'>
+    <Formik
+      initialValues={initiaValues}
+      onSubmit={props.handleSubmit}
+      validationSchema={LoginSchema}
+    >
+      {({ errors, touched, isValid, dirty, status }) => (
+            <Form autoComplete='off'>
         <div>
           <Field
             name="email"
             type='text'
             placeholder="email" />
-          <FormError name='email'/>
+          <FormError name='email' />
         </div>
         <div>
           <Field
             name="password"
             type="text"
             placeholder="Password" />
-          <FormError name='password'/>
+          <FormError name='password' />
         </div>
         <div>
           <Field
@@ -54,11 +56,12 @@ const LoginForm = (props) => {
             type={'checkbox'}
           />
           remember me
-        </div>
+          </div>
         <div>
           <button type="submit">SIGN UP</button>
         </div>
       </Form>
+  )}
     </Formik>
   );
 };

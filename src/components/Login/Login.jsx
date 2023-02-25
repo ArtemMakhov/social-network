@@ -4,9 +4,10 @@ import { login } from "../../redux/auth-raduser";
 import LoginForm from "./LoginForm";
 
 const Login = (props) => {
-    const handleSubmit = (values, {resetForm}) => {
-      console.log(values);
-      props.login(values.email,values.password,values.rememberMe)
+    const handleSubmit = (values, {resetForm, setStatus}) => {
+      props.login(values.email, values.password, values.rememberMe, setStatus)
+    
+  
     resetForm();
   }
 

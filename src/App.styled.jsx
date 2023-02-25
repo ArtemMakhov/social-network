@@ -18,3 +18,7 @@ export const Content = styled.div`
     grid-area: c;
     background-color: tomato;
 `
+export const Preloader = styled.div`
+    text-align: center;
+    margin-top: 200px;
+`

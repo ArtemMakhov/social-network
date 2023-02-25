@@ -1,21 +1,33 @@
+import { Component } from 'react';
+import { compose } from 'redux';
+import { connect } from "react-redux";
 import { Route, Routes } from 'react-router-dom';
 import { GlobalStyle } from './components/GlobalStyle';
-// import Header  from './components/Header/Header';
 import HeaderContainer from './components/Header/HeaderContainer';
 import Navbar from './components/Navbar/Navbar';
-import ProfileContainer from './components/Profile/ProfileContainer';
+import ProfileContainer, { withRouter } from './components/Profile/ProfileContainer';
 import News from './components/News/News';
 import Music from './components/Music/Music';
 import Settings from './components/UserSettings/Settings';
 import Friends from './components/Friends/Friends';
-import { Wrapper,Content } from './App.styled';
+import { Wrapper,Content ,Preloader} from './App.styled';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import Login from './components/Login/Login';
+import { initializeApp } from './redux/app-reduser';
+import { Loader } from './components/Loader/Loader';
 
-const App = () => {
-  return (
-   
+class App extends Component {
+    componentDidMount() {
+    this.props.initializeApp();
+  }
+  render() {
+    if (!this.props.initialized) {
+      return (<Preloader>
+        <Loader />
+        </Preloader>)
+    }
+    return (
     <Wrapper>
       <HeaderContainer />
       <Navbar />
@@ -34,10 +46,15 @@ const App = () => {
         </Routes>
       </Content>
       <GlobalStyle />
-    </Wrapper>
-     
+    </Wrapper>   
   );
+}
 };
+const mapStateToProps = (state) => ({
+  initialized: state.app.initialized,
+})   
 
 
-export default App;
+export default compose(
+  withRouter,
+  connect(mapStateToProps, { initializeApp }))(App);
