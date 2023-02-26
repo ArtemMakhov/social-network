@@ -14,7 +14,7 @@ const initialState = {
 
     ],
     profile: null,
-    status: '',
+    status: 'Hi!',
 };
 
 const profileReduser = (state = initialState, action) => {
