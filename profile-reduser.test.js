@@ -1,5 +1,4 @@
-import profileReduser, { addPostActionCreator } from "./redux/profile-reduser";
-import { nanoid } from 'nanoid';
+import profileReduser, { addPostActionCreator } from "./src/redux/profile-reduser";
 // import { render, screen } from '@testing-library/react';
 // import App from './App';
 
@@ -8,11 +7,10 @@ test('length of posts should be increment', () => {
     const action = addPostActionCreator("it-kamasutra.com");
     const state = {
     posts: [
-        { id: nanoid(), message: "Hi, how are you?", like: 20 },
-        { id: nanoid(), message: "It's my first post", like: 12 },
-        { id: nanoid(), message: "Hi!", like: 8 },
-        { id: nanoid(), message: "How are you?", like: 23 },
-
+        { id: 1, message: "Hi, how are you?", like: 20 },
+        { id: 2, message: "It's my first post", like: 12 },
+        { id: 3, message: "Hi!", like: 8 },
+        { id: 4, message: "How are you?", like: 23 },
     ]
     };
     // 2. action

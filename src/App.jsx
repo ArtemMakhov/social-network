@@ -15,7 +15,7 @@ import DialogsContainer from './components/Dialogs/DialogsContainer';
 import UsersContainer from './components/Users/UsersContainer';
 import Login from './components/Login/Login';
 import { initializeApp } from './redux/app-reduser';
-import { Loader } from './components/Loader/Loader';
+import { Loader } from './components/common/Loader/Loader';
 
 class App extends Component {
     componentDidMount() {

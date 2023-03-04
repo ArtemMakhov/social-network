@@ -52,24 +52,22 @@ export const addPostActionCreator = (newPostText) => ({ type: ADD_POST,newPostTe
 export const setUserProfile = (profile) => ({ type: SET_USER_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
 
-export const getUserProfile = (userId) => (dispatch) => { 
-    userApi.getProfile(userId).then(responce => {
-        dispatch(setUserProfile(responce.data))  
-    });
-}
+export const getUserProfile = (userId) => async (dispatch) => {
+    const responce = await userApi.getProfile(userId);
+    dispatch(setUserProfile(responce.data));
+};
 
-export const getStatus = (userId) => (dispatch) => {
-    profileAPI.getStatus(userId).then(responce => {
+export const getStatus = (userId) => async (dispatch) => {
+    const responce = await profileAPI.getStatus(userId);
+    dispatch(setStatus(responce.data));
+};
+
+export const updateStatus = (status) => async (dispatch) => {
+    const responce = await profileAPI.updateStatus(status);
+    if (responce.data.resultCode === 0) {
         dispatch(setStatus(responce.data));
-    });
-}
-export const updateStatus = (status) => (dispatch) => {
-    profileAPI.updateStatus(status).then(responce => {
-        if (responce.data.resultCode === 0) {
-            dispatch(setStatus(responce.data));
-        }
-    });
-}
+    }
+};
 
 
 export default profileReduser;

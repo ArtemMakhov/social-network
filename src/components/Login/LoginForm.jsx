@@ -1,6 +1,6 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import styled from 'styled-components';
+import { Formik, Form, Field } from 'formik';
+import { LoginSchema } from '../../utils/form-helpers/form-schema';
+import { FormError } from '../../utils/form-helpers/error-message';
 
 const initiaValues = {
   email: '',
@@ -8,30 +8,12 @@ const initiaValues = {
   rememberMe: false,
 };
 
-const LoginSchema = Yup.object().shape({
-  email: Yup.string().required(),
-  password: Yup.string().min(6).max(16).required(),
-  rememberMe: Yup.boolean().default(false),
-});
-
-const ErrorText = styled.p`
-  color: blue;
-`
-
-const FormError = ({ name }) => {
-  return (
-    <ErrorMessage name={name}
-      render={message => <ErrorText>{message}</ErrorText>}
-    />
-  )
-}
-
-const LoginForm = (props) => {
+const LoginForm = ({handleSubmit}) => {
 
   return (
     <Formik
       initialValues={initiaValues}
-      onSubmit={props.handleSubmit}
+      onSubmit={handleSubmit}
       validationSchema={LoginSchema}
     >
       {({ errors, touched, isValid, dirty, status }) => (
