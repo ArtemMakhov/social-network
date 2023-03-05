@@ -8,7 +8,8 @@ font-weight: 900;
 :hover{
   color: blue;
 }
- &.active{
-  color: red;
- }
+
+&.active {
+    color: #1ad7d7;
+}
 `
