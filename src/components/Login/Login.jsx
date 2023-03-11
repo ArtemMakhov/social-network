@@ -4,10 +4,9 @@ import { login } from "../../redux/auth-raduser";
 import LoginForm from "./LoginForm";
 
 const Login = (props) => {
-    const handleSubmit = (values, {resetForm, setStatus}) => {
-      props.login(values.email, values.password, values.rememberMe, setStatus)
-    
   
+    const handleSubmit = (values, {resetForm, setStatus}) => {
+      props.login(values.email, values.password, values.rememberMe,values.captcha, setStatus)
     resetForm();
   }
 
@@ -18,12 +17,13 @@ const Login = (props) => {
   return (
     <>
       <h1>Login</h1>
-      <LoginForm handleSubmit={handleSubmit} />
+      <LoginForm handleSubmit={handleSubmit} captchaUrl={props.captchaUrl } />
     </>
   );
 }
 
 const mapStateToProps = (state) => ({
+  captchaUrl: state.auth.captchaUrl,
   isAuth: state.auth.isAuth
 });
 

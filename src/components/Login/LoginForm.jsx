@@ -8,7 +8,7 @@ const initiaValues = {
   rememberMe: false,
 };
 
-const LoginForm = ({handleSubmit}) => {
+const LoginForm = ({handleSubmit,captchaUrl}) => {
 
   return (
     <Formik
@@ -16,8 +16,14 @@ const LoginForm = ({handleSubmit}) => {
       onSubmit={handleSubmit}
       validationSchema={LoginSchema}
     >
+     
       {({ errors, touched, isValid, dirty, status }) => (
-            <Form autoComplete='off'>
+        <Form autoComplete='off'>
+          
+          <div>
+            {captchaUrl && <img src={captchaUrl} alt={'secure'} />}
+            {captchaUrl &&  <Field name="captcha" type="input" placeholder="symbol from image" /> }
+        </div>
         <div>
           <Field
             name="email"
