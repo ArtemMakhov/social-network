@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
 `
 export const Content = styled.div`
     grid-area: c;
-    background-color: tomato;
+    background-color: ${p => p.theme.colors.muted};
 `
 export const Preloader = styled.div`
     text-align: center;

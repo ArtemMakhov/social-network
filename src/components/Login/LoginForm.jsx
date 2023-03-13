@@ -1,5 +1,5 @@
 import { Formik, Form, Field } from 'formik';
-import { LoginSchema } from '../../utils/form-helpers/form-schema';
+import { LoginSchema, CaptchaSchema } from '../../utils/form-helpers/form-schema';
 import { FormError } from '../../utils/form-helpers/error-message';
 
 const initiaValues = {
@@ -18,11 +18,14 @@ const LoginForm = ({handleSubmit,captchaUrl}) => {
     >
      
       {({ errors, touched, isValid, dirty, status }) => (
-        <Form autoComplete='off'>
-          
+        <Form autoComplete='off'>        
           <div>
             {captchaUrl && <img src={captchaUrl} alt={'secure'} />}
-            {captchaUrl &&  <Field name="captcha" type="input" placeholder="symbol from image" /> }
+            {captchaUrl && <Field
+              validate={CaptchaSchema}
+              name="captcha"
+              type="input"
+              placeholder="symbol from image" />}
         </div>
         <div>
           <Field
