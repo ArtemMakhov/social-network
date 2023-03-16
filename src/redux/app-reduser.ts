@@ -2,13 +2,15 @@ import { getAuthUserData } from './auth-raduser';
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
 
+export type initialStateType = {
+  initialized: boolean
+}
 
-
-const initialState = {
+const initialState: initialStateType = {
  initialized: false,
 };
 
-const appReduser = (state = initialState, action) => {
+const appReduser = (state = initialState, action: any): initialStateType => {
      
   switch (action.type) {
 
@@ -23,10 +25,13 @@ const appReduser = (state = initialState, action) => {
 
 };
 
+type initiaslizedSuccessActionType = {
+  type: typeof INITIALIZED_SUCCESS
+}
 
-export const initiaslizedSuccess = () => ({ type: INITIALIZED_SUCCESS });
+export const initiaslizedSuccess = ():initiaslizedSuccessActionType => ({ type: INITIALIZED_SUCCESS });
 
-export const initializeApp = () => (dispatch) => {
+export const initializeApp = () => (dispatch: any) => {
  let promise =  dispatch(getAuthUserData());
 
   Promise.all([promise])
@@ -34,7 +39,6 @@ export const initializeApp = () => (dispatch) => {
       dispatch(initiaslizedSuccess());
     });
 }
-
 
 
 export default appReduser;
