@@ -3,31 +3,24 @@ import { authAPI, securityAPI } from "../api/api";
 const SET_USER_DATA = 'SET_USER_DATA';
 const GET_CAPTCHA_URL_SUCCESS = 'GET_CAPTCHA_URL_SUCCESS';
 
-export type initialStateType = {
-  userId: number | null
-  email: string | null
-  login: string | null
-  isAuth: boolean
-  isFetching: boolean
-  captchaUrl: string | null
-}
-
-const initialState:initialStateType = {
-  userId: null,
-  email: null,
-  login: null,
+const initialState = {
+  userId: null as number | null,
+  email: null as string | null,
+  login: null as string | null,
   isAuth: false,
-  isFetching: false,
-  captchaUrl: null,
+  captchaUrl: null as string | null,
 };
 
-const authReduser = (state = initialState, action: any): initialStateType => {
+export type InitialStateType = typeof initialState;
+
+const authReduser = (state = initialState, action: any): InitialStateType => {
      
   switch (action.type) {
 
     case SET_USER_DATA:
       case GET_CAPTCHA_URL_SUCCESS:
       return {
+        userId245:'qweqwe',
         ...state,
         ...action.payload,
       }

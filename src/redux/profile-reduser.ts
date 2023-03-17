@@ -6,6 +6,33 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCESS = 'SAVE_PHOTO_SUCCESS';
 
+type PostType = {
+    id: string
+    message: string
+    like: number
+}
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtuber: string
+    mainLink:string
+}
+type PhotosType = {
+    small: string | null
+    large: string | null
+}
+type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    fullName: string
+    contacts: ContactsType
+    photos: PhotosType
+}
+
 const initialState = {
     posts: [
         { id: nanoid(), message: "Hi, how are you?", like: 20 },
@@ -13,12 +40,15 @@ const initialState = {
         { id: nanoid(), message: "Hi!", like: 8 },
         { id: nanoid(), message: "How are you?", like: 23 },
 
-    ],
-    profile: null,
-    status: 'Hi!',
+    ] as Array<PostType>,
+    profile: null as ProfileType | null,
+    status: '',
+    newPostText:''
 };
 
-const profileReduser = (state = initialState, action) => {
+export type InitialStateType = typeof initialState
+
+const profileReduser = (state = initialState, action:any):InitialStateType => {
      
     switch (action.type) {
         case ADD_POST:
