@@ -1,10 +1,17 @@
 import { NavLink } from 'react-router-dom';
 import userPhoto from '../../images/avatar.png';
+import {  UserType } from '../../types/types';
 
 
-export const User = ({ user,followingInProgress,unfollow,follow }) => {
+type PropsType = {
+    user: UserType
+    followingInProgress: Array<number>
+    unfollow: (userId: number) => void
+    follow: (userId: number) => void
+}
+
+export const User: React.FC<PropsType> = ({ user,followingInProgress,unfollow,follow }) => {
   
-
     return (
    
                 <div >
@@ -25,8 +32,7 @@ export const User = ({ user,followingInProgress,unfollow,follow }) => {
                                     unfollow(user.id)
                                 }}>Unfollow</button>
                                 : <button disabled={followingInProgress.some(id => id === user.id)}
-                                    onClick={() => {
-                                       
+                                    onClick={() => {            
                                     follow(user.id)
                                 }}>Follow</button>}
                         </div>
@@ -35,10 +41,6 @@ export const User = ({ user,followingInProgress,unfollow,follow }) => {
                         <span>
                             <div>{user.name}</div>
                             <div>{user.status}</div>
-                        </span>
-                        <span>
-                            <div>{"user.location.country"}</div>
-                            <div>{"user.location.city"}</div>
                         </span>
                     </span>
                 </div>
