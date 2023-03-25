@@ -42,34 +42,48 @@ type PropsType = MapStatePropsType & MapDispatchPropsType & OwnPropsType
 
 class UsersContainer extends React.Component<PropsType>{
     componentDidMount() {
-        const { currentPage, pageSize } = this.props;
-        this.props.getUsers(currentPage, pageSize);
+        const { currentPage, pageSize, getUsers } = this.props;
+        getUsers(currentPage, pageSize);
     };
 
     onPageChanged = (pageNumber: number) => {
-        const { pageSize } = this.props;
-        this.props.getUsers(pageNumber, pageSize);
+        const { pageSize, getUsers } = this.props;
+        getUsers(pageNumber, pageSize);
     };
+
+    
 
     render() {
 
+        const {
+            pageTitle,
+            isFetching,
+            totalUsersCount,
+            currentPage,
+            pageSize,
+            users,
+            followingInProgress,
+            follow,
+            unfollow
+        } = this.props;
+        
         return (
             <>
-                <h2>{this.props.pageTitle}</h2>
-                {this.props.isFetching ? <Loader /> : null}
+                <h2>{pageTitle}</h2>
+                {isFetching ? <Loader /> : null}
                 <Users
-                    totalUsersCount={this.props.totalUsersCount}
-                    currentPage={this.props.currentPage}
-                    pageSize={this.props.pageSize}
+                    totalUsersCount={totalUsersCount}
+                    currentPage={currentPage}
+                    pageSize={pageSize}
                     onPageChanged={this.onPageChanged}
-                    users={this.props.users}
-                    follow={this.props.follow}
-                    unfollow={this.props.unfollow} 
-                    followingInProgress={this.props.followingInProgress}
+                    users={users}
+                    follow={follow}
+                    unfollow={unfollow} 
+                    followingInProgress={followingInProgress}
                 />
             </>
         );
-}
+    }
 }
 
 const mapStateToProps = (state: AppStateType) => {
