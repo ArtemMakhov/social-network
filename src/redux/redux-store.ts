@@ -18,6 +18,7 @@ let rootReduser = combineReducers({
 })
 
 type RootReduserType = typeof rootReduser; // (globalstate: AppStateType) => AppStateType
+
 export type AppStateType = ReturnType<RootReduserType>
 
 // @ts-ignore

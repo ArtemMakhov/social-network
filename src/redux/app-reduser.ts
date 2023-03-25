@@ -1,3 +1,4 @@
+// import { Dispatch } from 'redux';
 import { getAuthUserData } from './auth-raduser';
 
 const INITIALIZED_SUCCESS = 'INITIALIZED_SUCCESS';
@@ -10,7 +11,7 @@ const initialState: initialStateType = {
  initialized: false,
 };
 
-const appReduser = (state = initialState, action: any): initialStateType => {
+const appReduser = (state = initialState, action: ActionsTypes): initialStateType => {
      
   switch (action.type) {
 
@@ -25,12 +26,15 @@ const appReduser = (state = initialState, action: any): initialStateType => {
 
 };
 
+type ActionsTypes = initiaslizedSuccessActionType
+
 type initiaslizedSuccessActionType = {
   type: typeof INITIALIZED_SUCCESS
 }
 
 export const initiaslizedSuccess = ():initiaslizedSuccessActionType => ({ type: INITIALIZED_SUCCESS });
 
+// type DispatchType = Dispatch<ActionsTypes>
 export const initializeApp = () => (dispatch: any) => {
  let promise =  dispatch(getAuthUserData());
 
