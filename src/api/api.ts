@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ProfileType } from '../types/types';
+import { ProfileType, UserType } from '../types/types';
 
 const instance = axios.create({
   baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -8,36 +8,57 @@ const instance = axios.create({
   
 })
 
+export enum ResultCodesEnum {
+  Success = 0,
+  Error = 1,
+}
+
+export enum ResultCodeForCaptcha {
+    CaptchaIsRequired = 10
+}
+
+type UsersResponseType = {
+  items: Array<UserType>
+  totalCount: number
+  error: string | null
+}
+type UnfollowResponseType = {
+  resultCode: ResultCodesEnum
+  messages: Array<string>
+  data: any
+}
 
 export  const userApi = {
   getUsers (currentPage: number,pageSize: number) {
-    return instance.get(`users?page=${currentPage}&count=${pageSize}`
+    return instance.get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`
     )
-      .then(responce => {
-        return responce.data;
+      .then(res => {
+        return res.data;
       });
   },
    follow(id: number) {
     return instance.delete(`follow/${id}`)
-      .then(responce => {
-        return responce.data;
+      .then(res => {
+        return res.data;
       });
   },
   unfollow(id: number) {
-    return instance.post(`follow/${id}`)
-      .then(responce => {
-        return responce.data;
+    return instance.post<UnfollowResponseType>(`follow/${id}`)
+      .then(res => {
+        return res.data;
     })
   },
-  getProfile(userId: number) {
+  getProfile(userId: number ) {
     console.warn('Obsolete method. Please profileAPI object');
     return profileAPI.getProfile(userId);
   }
 }
 
+
+
 export const profileAPI = {
   getProfile(userId: number) {
-    return instance.get(`profile/${userId}`);
+    return instance.get<ProfileType>(`profile/${userId}`);
   },
   getStatus(userId: number) {
     return instance.get(`profile/status/${userId}`);
@@ -59,15 +80,7 @@ export const profileAPI = {
   },
 };
 
-export enum ResultCodesEnum {
-  Success = 0,
-  Error = 1,
 
-}
-
-export enum ResultCodeForCaptcha {
-    CaptchaIsRequired = 10
-}
 
 type MeResponseType = {
   data: {
@@ -95,13 +108,13 @@ export const authAPI = {
       .then(res => res.data);
   },
   logout() {
-    return instance.delete('auth/login');
+    return instance.delete('auth/login').then(res => res.data);
   }
 };
 
 export const securityAPI = {
   getCaptchaUrl() {
-    return instance.get(`security/get-captcha-url`);
+    return instance.get(`security/get-captcha-url`).then(res => res.data);
   },
 };
 

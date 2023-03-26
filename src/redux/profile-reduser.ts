@@ -99,9 +99,9 @@ export const savePhotoSuccess = (photos:PhotosType):SavePhotoSuccessActionType=>
 
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
-export const getUserProfile = (userId:number | null): ThunkType => async (dispatch) => {
+export const getUserProfile = (userId: number | null): ThunkType => async (dispatch) => {
     const responce = await userApi.getProfile(userId);
-    dispatch(setUserProfile(responce.data));
+    dispatch(setUserProfile(responce.data)); 
 };
 
 export const getStatus = (userId:number): ThunkType => async (dispatch) => {

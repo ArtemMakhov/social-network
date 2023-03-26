@@ -81,16 +81,16 @@ dispatch(getCaptchaUrl())
 };
 
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
-  const response = await securityAPI.getCaptchaUrl();
-  const captchaUrl = response.data.url;
+  const captchaUrlData = await securityAPI.getCaptchaUrl();
+  const captchaUrl = captchaUrlData.url;
    
     dispatch(getCaptchaUrlSuccess(captchaUrl));
 };
 
 export const logout = (): ThunkType => async (dispatch) => {
-  const response = await authAPI.logout();
+  const logoutData = await authAPI.logout();
     
-  if (response.data.resultCode === 0) {
+  if (logoutData.resultCode === ResultCodesEnum.Success) {
     dispatch(setAuthUserData(null, null, null, false));
   }
 };
