@@ -1,7 +1,7 @@
 import { ResultCodesEnum } from './../api/api';
 import { AppStateType, InferActionsTypes } from './redux-store';
 import { UserType } from './../types/types';
-import { userApi } from "../api/api";
+import { userApi } from "../api/users-api";
 import { updateObjectInArray } from "../utils/object-helpers";
 import { Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';

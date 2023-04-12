@@ -1,35 +1,21 @@
-import { UserType } from "../types/types";
-import { instance,ResultCodesEnum } from "./api";
+import { instance,GetItemsType, ResponseType } from "./api";
 
-type UsersResponseType = {
-  items: Array<UserType>
-  totalCount: number
-  error: string | null
-}
-type UnfollowResponseType = {
-  resultCode: ResultCodesEnum
-  messages: Array<string>
-  data: any
-}
-
-export  const userApi = {
-  getUsers (currentPage: number,pageSize: number) {
-    return instance.get<UsersResponseType>(`users?page=${currentPage}&count=${pageSize}`
+export const userApi = {
+  getUsers(currentPage: number, pageSize: number) {
+    return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}`
     )
       .then(res => {
         return res.data;
       });
   },
-   follow(id: number) {
-    return instance.delete(`follow/${id}`)
-      .then(res => {
-        return res.data;
-      });
-  },
   unfollow(id: number) {
-    return instance.post<UnfollowResponseType>(`follow/${id}`)
+    return instance.post<ResponseType>(`follow/${id}`)
       .then(res => {
         return res.data;
-    })
+      })
+  },
+  follow(id: number) {
+    return instance.delete(`follow/${id}`)
+      .then(res => { return res.data }) as Promise<ResponseType>
   }
 }

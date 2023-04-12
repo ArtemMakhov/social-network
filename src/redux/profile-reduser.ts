@@ -1,5 +1,6 @@
 import { PostType, ProfileType, PhotosType } from './../types/types';
-import { userApi, profileAPI } from '../api/api';
+import { profileAPI } from '../api/profile-api';
+// import { userApi } from '../api/users-api';
 import { AppStateType } from './redux-store';
 import { ThunkAction } from 'redux-thunk';
 
@@ -100,8 +101,8 @@ export const savePhotoSuccess = (photos:PhotosType):SavePhotoSuccessActionType=>
 type ThunkType = ThunkAction<Promise<void>, AppStateType, unknown, ActionsTypes>
 
 export const getUserProfile = (userId: number | null): ThunkType => async (dispatch) => {
-    const responce = await userApi.getProfile(userId);
-    dispatch(setUserProfile(responce.data)); 
+    const data = await profileAPI.getProfile(userId);
+    dispatch(setUserProfile(data)); 
 };
 
 export const getStatus = (userId:number): ThunkType => async (dispatch) => {
@@ -110,16 +111,16 @@ export const getStatus = (userId:number): ThunkType => async (dispatch) => {
 };
 
 export const updateStatus = (status:string): ThunkType => async (dispatch) => {
-    const responce = await profileAPI.updateStatus(status);
-    if (responce.data.resultCode === 0) {
+    const data = await profileAPI.updateStatus(status);
+    if (data.resultCode === 0) {
         dispatch(setStatus(status));
     }
 };
 
 export const savePhoto = (file: any): ThunkType => async (dispatch) => {
-    const responce = await profileAPI.savePhoto(file);
-    if (responce.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(responce.data.data.photos));
+    const data = await profileAPI.savePhoto(file);
+    if (data.resultCode === 0) {
+        dispatch(savePhotoSuccess(data.data.photos));
     }
 };
 
