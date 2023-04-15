@@ -1,6 +1,5 @@
-// import { nanoid } from 'nanoid';
+import { InferActionsTypes } from "./redux-store";
 
-const ADD_MESSAGE = 'ADD-MESSAGE';
 
 type DialogType = {
     id: number
@@ -29,14 +28,10 @@ const initialState = {
     ] as Array<MessageType>,
 };
 
-export type InitialStateType = typeof initialState
-
-type ActionsType = addMessageActionCreatorActionType
-
 const dialogsReduser = (state = initialState, action: ActionsType): InitialStateType => {
    
     switch (action.type) {
-        case ADD_MESSAGE:
+        case 'SN/DIALOGS/ADD-MESSAGE':
             let newMessage = {
                 id: Math.random(),
                 message: action.newMessageText,
@@ -49,11 +44,11 @@ const dialogsReduser = (state = initialState, action: ActionsType): InitialState
     }
 }
 
-type addMessageActionCreatorActionType = {
-    type: typeof ADD_MESSAGE
-    newMessageText: string
+export const actions = {
+addMessageActionCreator:(newMessageText:string) => ({ type: 'SN/DIALOGS/ADD-MESSAGE',newMessageText } as const)
 }
 
-export const addMessageActionCreator = (newMessageText:string):addMessageActionCreatorActionType => ({ type: ADD_MESSAGE,newMessageText });
-
 export default dialogsReduser;
+
+export type InitialStateType = typeof initialState
+type ActionsType = InferActionsTypes<typeof actions>

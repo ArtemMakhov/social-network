@@ -17,7 +17,7 @@ export const profileAPI = {
   updateStatus(status: string) {
     return instance.put<ResponseType>(`profile/status`, { status: status }).then(res => res.data);
   },
-  savePhoto(photoFile: any) {
+  savePhoto(photoFile: File) {
     const formData = new FormData();
     formData.append('image', photoFile)
     return instance.put<ResponseType<SavePhotoResponseDataType>>(`profile/photo`, formData, {
@@ -27,6 +27,6 @@ export const profileAPI = {
     }).then(res => res.data)
   },
   saveProfile(profile: ProfileType) {
-    return instance.put(`profile`, profile).then(res => res.data);
+    return instance.put<ResponseType>(`profile`, profile).then(res => res.data);
   },
 };
