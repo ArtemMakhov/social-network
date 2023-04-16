@@ -1,5 +1,4 @@
 import React,{Suspense} from 'react';
-import { Component } from 'react';
 import { compose } from 'redux';
 import { connect } from "react-redux";
 import { Route, Routes } from 'react-router-dom';
@@ -16,11 +15,17 @@ import UsersContainer from './components/Users/UsersContainer';
 import Login from './components/Login/Login';
 import { initializeApp } from './redux/app-reduser';
 import { Loader } from './components/common/Loader/Loader';
+import { AppStateType } from './redux/redux-store';
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'));
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'));
 
-class App extends Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+  initializeApp: ()=> void
+}
+
+class App extends React.Component<MapPropsType & DispatchPropsType> {
     componentDidMount() {
     this.props.initializeApp();
   }
@@ -49,7 +54,7 @@ class App extends Component {
                 <DialogsContainer />
               </Suspense>
             } />
-            <Route path='/users' element={<UsersContainer pageTitle={ 'samurai'} />} />
+            <Route path='/users' element={<UsersContainer />} />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />
@@ -61,11 +66,11 @@ class App extends Component {
     );
 }
 };
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType) => ({
   initialized: state.app.initialized,
 })   
 
 
-export default compose(
+export default compose<React.ComponentType>(
   withRouter,
   connect(mapStateToProps, { initializeApp }))(App);

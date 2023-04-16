@@ -45,7 +45,7 @@ const dialogsReduser = (state = initialState, action: ActionsType): InitialState
 }
 
 export const actions = {
-addMessageActionCreator:(newMessageText:string) => ({ type: 'SN/DIALOGS/ADD-MESSAGE',newMessageText } as const)
+addMessage:(newMessageText:string) => ({ type: 'SN/DIALOGS/ADD-MESSAGE',newMessageText } as const)
 }
 
 export default dialogsReduser;

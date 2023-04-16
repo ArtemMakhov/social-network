@@ -13,16 +13,14 @@ let rootReduser = combineReducers({
     dialogPage: dialogsReduser,
     sidebar: sidebarReduser,
     usersPage: usersReduser,
-    auth: authReduser,  
+    auth: authReduser,
     app: appReduser,
 })
 
 type RootReduserType = typeof rootReduser; // (globalstate: AppStateType) => AppStateType
-
 export type AppStateType = ReturnType<RootReduserType>
 
-type PropertiesTypes<T> = T extends { [key: string]: infer U } ? U : never
-export type InferActionsTypes<T extends { [key: string]: (...args: any[])=> any}> = ReturnType<PropertiesTypes<T>>
+export type InferActionsTypes<T> = T extends {[keys: string]: (...args: any[])=> infer U} ? U : never
 
 export type BaseThunckType<A extends Action,R=Promise<void>> = ThunkAction<R, AppStateType, unknown,A>
 // @ts-ignore

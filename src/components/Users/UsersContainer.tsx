@@ -96,9 +96,9 @@ const mapStateToProps = (state: AppStateType) => {
     }
 }
 
-export default compose<PropsType>(
-    connect(mapStateToProps,{fpllows :follow, unfollow,getUsers: requestUsers})
-)(UsersContainer)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, { follow: follow, unfollow, getUsers: requestUsers })
+)(UsersContainer) 
 
 
 

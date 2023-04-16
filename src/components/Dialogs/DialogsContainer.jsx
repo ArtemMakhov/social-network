@@ -6,22 +6,20 @@ import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 let mapStateToProps = (state) => { 
     return {
-        dialogs: state.dialogPage.dialogs,
-        messages: state.dialogPage.messages,
-        newMessageText: state.dialogPage.newMessageText,
+        dialogPage: state.dialogPage,
     }
 }
 
-let mapDispatchToProps = (dispatch) => {
-    return {
-        addMessage: (newMessageText) => {
-            dispatch(actions.addMessageActionCreator(newMessageText));
-        },
-    }
-};
+// let mapDispatchToProps = (dispatch) => {
+//     return {
+//         addMessage: (newMessageText) => {
+//             dispatch(actions.addMessage(newMessageText));
+//         },
+//     }
+// };
 
 export default compose(
-    connect(mapStateToProps,mapDispatchToProps),
+    connect(mapStateToProps,{...actions}),
    withAuthRedirect 
 )(Dialogs);
 
