@@ -2,13 +2,18 @@ import React from 'react';
 import Post from './Post/Post';
 import { Title } from './MyPosts.styled';
 import PostsForm from './PostsForm';
+import { PostType } from '../../../types/types';
 
+type PropsTYpe = {
+    posts: Array<PostType>
+    addPost:(newPostText: string)=> void
+}
 
-const MyPosts = (props) => {
+const MyPosts: React.FC<PropsTYpe> = (props) => {
 
-    const userPost = props.posts.map(post => <Post key={post.id} message={post.message} like={post.like} />);
+    const userPost = props.posts.map(post => <Post key={post.id} message={post.message} like={post.like}  />);
  
-    const onSubmit = (values) => {
+    const onSubmit = (values: any) => {
           props.addPost(values.post);
     };
     
