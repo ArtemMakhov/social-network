@@ -1,22 +1,22 @@
 import { Formik, Form, Field } from 'formik';
+import { ProfileType } from '../../../types/types';
 import { FormError } from '../../../utils/form-helpers/error-message';
 
-// const initiaValues = {
-//   fullName: '',
-//   LookingForAJob: false,
-//   professionalSkills: '',
-//   aboutMe: '',
-// };
+
+type PropsType = {
+  profile: ProfileType
+  handleSubmit: (values:ProfileType ,{resetForm}:any) => void
+  initiaValues:ProfileType
+}
 
 
-export const ProfileDataForm = ({profile,handleSubmit,initiaValues}) => {
+export const ProfileDataForm:React.FC<PropsType> = ({profile,handleSubmit,initiaValues}) => {
   return (
  
   
     <Formik
       initialValues={initiaValues}
       onSubmit={handleSubmit}
-    // validationSchema={LoginSchema}
     >
       {({ errors, touched ,status}) => (
         <Form autoComplete='off'>
@@ -70,20 +70,3 @@ export const ProfileDataForm = ({profile,handleSubmit,initiaValues}) => {
     </Formik >
   );
 }
-
-                   /* <div><p>{profile.fullName}</p></div>
-                    <div><b>Looking for a job</b>: {profile.lookingForAJob ? "yes" : "no"}</div>
-                    {profile.lookingForAJob && 
-                    <div>
-                        <b>My professional skills</b>: {profile.lookingForAJobDescription}
-                    </div>}
-                    <div><b>About me</b>: {profile.aboutMe}</div>
-                    <div>
-                        <b>Contacts</b>:{Object.keys(profile.contacts).map(key => {
-                            return <Contact
-                                key={key}
-                                contactTitle={key}
-                                contactValue={profile.contacts[key]}
-                            />
-                        })}
-                    </div> */
