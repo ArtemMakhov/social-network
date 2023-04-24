@@ -1,7 +1,13 @@
 import { Contact,Img } from './Dialog.styled';
 import { Box } from '../../Box';
 
-export const Dialog = ({ name, avatar,id }) => {
+type ProosType = {
+    name: string
+    avatar: string
+    id: number
+}
+
+export const Dialog: React.FC<ProosType> = ({ name, avatar,id }) => {
 
     return (
         <Box m="10px">

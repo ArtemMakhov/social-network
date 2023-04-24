@@ -1,6 +1,10 @@
 import { MessageItem } from './Message.styled';
 
-export const Message = ({ message }) => {
+type PropsType = {
+    message: string
+}
+
+export const Message: React.FC<PropsType> = ({ message }) => {
     return (
         <MessageItem>{message}</MessageItem>
     )

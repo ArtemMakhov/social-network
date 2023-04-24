@@ -17,7 +17,7 @@ const Dialogs: React.FC<PropsType> = (props) => {
 
     let state = props.dialogPage;
 
-    let userDialogs = state.dialogs.map(dialog => <Dialog name={dialog.name} avatar={dialog.avatar} key={dialog.id} id={undefined} />);
+    let userDialogs = state.dialogs.map(dialog => <Dialog name={dialog.name} avatar={dialog.avatar} key={dialog.id} id={dialog.id} />);
     let userMessages = state.messages.map(message => <Message message={message.message} key={ message.id} />);
     
     const onSubmit = (values: NewMessageFormType) => {

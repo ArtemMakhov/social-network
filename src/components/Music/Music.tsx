@@ -1,4 +1,4 @@
-const Music = () => {
+const Music: React.FC = () => {
     return (
         <div>
             <h1>

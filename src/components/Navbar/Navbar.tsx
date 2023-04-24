@@ -1,6 +1,6 @@
 import { Navigate,NavigateList } from "./Navbar.styled";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
     return (
         <Navigate>
             <div><NavigateList to="/profile">Profile</NavigateList></div>

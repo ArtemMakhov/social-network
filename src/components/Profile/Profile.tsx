@@ -6,9 +6,9 @@ type PropsType = {
     isOwner: boolean
     profile: ProfileType
     status: string
-    updateStatus: () => void
-    savePhoto: () => void
-    saveProfile: ()=> void
+    updateStatus: (status: string) => void
+    savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType)=> void
 }
 
 const Profile: React.FC<PropsType> = ({isOwner,profile,status,updateStatus,savePhoto,saveProfile}) => {
