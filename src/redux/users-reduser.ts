@@ -13,6 +13,9 @@ const initialState = {
     currentPage: 1,
     isFetching: false,
     followingInProgress: [] as Array<number>,  //array of users id
+    filter: {
+        term: ''
+    }
 };
 
 const usersReduser = (state = initialState, action:ActionsTypes):InitialStateType => {
@@ -47,6 +50,11 @@ const usersReduser = (state = initialState, action:ActionsTypes):InitialStateTyp
                 ...state,
                 isFetching: action.isFetching
             }
+        case 'SN/USERS/SET_FILTER':
+            return {
+                ...state,
+                filter: action.payload
+            }
                 case 'SN/USERS/TOGGLE_IS_FOLLOWING_PROGRESS':
             return {
                 ...state,
@@ -67,17 +75,19 @@ export const actions = {
     followSuccess: (userId: number) => ({ type: 'SN/USERS/FOLLOW', userId } as const),
     unfollowSuccess: (userId: number) => ({ type: 'SN/USERS/UNFOLLOW', userId } as const),
     setCurrentPage: (currentPage: number) => ({ type: 'SN/USERS/SET_CURRENT_PAGE', currentPage } as const),
+    setFilter: (term: string) => ({ type: 'SN/USERS/SET_FILTER', payload:{term} } as const),
     setTotalUsersCount: (totalUsersCount: number) => ({ type: 'SN/USERS/SET_TOTAL_USERS_COUNT', totalUsersCount } as const),
     toggleIsFetching: (isFetching: boolean) => ({ type: 'SN/USERS/TOGGLE_IS_FETCHING', isFetching } as const),
     toggleFollowingProgress: (isFetching: boolean, userId: number) => ({ type: 'SN/USERS/TOGGLE_IS_FOLLOWING_PROGRESS', isFetching, userId } as const),
 }    
 
-export const requestUsers = (page: number, pageSize: number): ThunkType => {
+export const requestUsers = (page: number, pageSize: number,term:string): ThunkType => {
     return async (dispatch, getState) => {
         dispatch(actions.toggleIsFetching(true));
         dispatch(actions.setCurrentPage(page));
+        dispatch(actions.setFilter(term))
 
-        const data = await userApi.getUsers(page, pageSize);
+        const data = await userApi.getUsers(page, pageSize,term);
         dispatch(actions.toggleIsFetching(false));
         dispatch(actions.setUsers(data.items));
         dispatch(actions.setTotalUsersCount(data.totalCount));
@@ -114,5 +124,6 @@ export default usersReduser;
 
 
 export type InitialStateType = typeof initialState
+export type FilterType = typeof initialState.filter
 type DispatchType = Dispatch<ActionsTypes>
 type ThunkType = BaseThunckType<ActionsTypes>  
