@@ -11,8 +11,8 @@ import Music from './components/Music/Music';
 import Settings from './components/UserSettings/Settings';
 import Friends from './components/Friends/Friends';
 import { Wrapper,Content ,Preloader} from './App.styled';
-import UsersContainer from './components/Users/UsersContainer';
-import Login from './components/Login/Login';
+import  { UsersPage } from './components/Users/UsersContainer';
+import {LoginPage} from './components/Login/LoginPage';
 import { initializeApp } from './redux/app-reduser';
 import { Loader } from './components/common/Loader/Loader';
 import { AppStateType } from './redux/redux-store';
@@ -48,13 +48,13 @@ class App extends React.Component<MapPropsType & DispatchPropsType> {
             }>
               <Route path=":userId" element={<ProfileContainer />} />
             </Route>
-            <Route path='/login' element={<Login />} />
+            <Route path='/login' element={<LoginPage/>} />
             <Route path='/dialog/*' element={
               <Suspense fallback={<div><Loader/></div>}>
                 <DialogsContainer />
               </Suspense>
             } />
-            <Route path='/users' element={<UsersContainer />} />
+            <Route path='/users' element={<UsersPage pageTitle={"Samurai"} />} />
             <Route path='/news' element={<News />} />
             <Route path='/music' element={<Music />} />
             <Route path='/settings' element={<Settings />} />

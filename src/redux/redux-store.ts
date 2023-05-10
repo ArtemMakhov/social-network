@@ -22,7 +22,9 @@ export type AppStateType = ReturnType<RootReduserType>
 
 export type InferActionsTypes<T> = T extends {[keys: string]: (...args: any[])=> infer U} ? U : never
 
-export type BaseThunckType<A extends Action,R=Promise<void>> = ThunkAction<R, AppStateType, unknown,A>
+export type BaseThunckType<A extends Action, R = Promise<void>> = ThunkAction<R, AppStateType, unknown, A>
+
+export type AppDispatch = typeof store.dispatch;
 // @ts-ignore
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(rootReduser, composeEnhancers(applyMiddleware(thunkMiddleware)));
