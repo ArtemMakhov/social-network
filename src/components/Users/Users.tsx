@@ -13,11 +13,11 @@ import {
     getFollowingInProgress
 } from '../../redux/selectors/users-selector';
 import { AppDispatch } from '../../redux/redux-store';
+import { useSearchParams } from 'react-router-dom';
 
 
-type PropsType = {}
+export const Users: React.FC = () => {
 
-export const Users: React.FC<PropsType> = () => {
     const users = useSelector(getUsers)
     const totalUsersCount = useSelector(getTotalUsersCount)
     const currentPage = useSelector(getCurrentPage)
@@ -27,9 +27,54 @@ export const Users: React.FC<PropsType> = () => {
 
     const dispatch: AppDispatch = useDispatch()
 
+    const [searchParams, setSearchParams] = useSearchParams()
+    
     useEffect(() => {
-        dispatch(requestUsers(currentPage, pageSize,filter))
-    },[])
+        const result: any = {}
+        //@ts-ignore
+        for (const [key, value] of searchParams.entries()) {
+            let value2: any = +value
+            if (isNaN(value2)) {
+                value2 = value
+            }
+            if (value === 'true') {
+                value2 = true
+            } else {
+                value2 = false
+            }
+            result[key] = value2
+        }
+
+        let actualPage = result.page || currentPage
+        let term = result.term || filter.term
+
+        let friend = result.friend || filter.friend
+        if (result.friend === false) {
+            friend = result.friend
+        }
+
+        const actualFilter = { friend, term }
+        
+        dispatch(requestUsers(actualPage, pageSize, actualFilter))
+        
+        // eslint-disable-next-line
+    }, [])
+    
+    useEffect(() => {
+        const term = filter.term
+        const friend = filter.friend
+
+        let urlQuery =
+            (term === '' ? '' : `&term=${term}`)
+            + (friend === null ? '' : `&friend=${friend}`)
+            + (currentPage === 1 ? '' : `&page=${currentPage}`)
+        
+        setSearchParams(urlQuery)
+      
+        // eslint-disable-next-line
+    },[currentPage, filter])
+    
+
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(requestUsers(pageNumber, pageSize, filter))
@@ -48,17 +93,17 @@ export const Users: React.FC<PropsType> = () => {
         <div>
             <UsersSearchForm onFilterChanged={onFilterChanged} />
             <Paginator
+                // currentPage={currentPage}
                 onPageChanged={onPageChanged}
                 totalItemsCount={totalUsersCount}
                 pageSize={pageSize}
             />
-            {users.map(user => <User
-                user={user}
-                key={user.id}
-                followingInProgress={followingInProgress}
-                follow={follow}
-                unfollow={unfollow} />
-             
+            {users.map(user =>
+                <User key={user.id}
+                    user={user}
+                    followingInProgress={followingInProgress}
+                    follow={follow}
+                    unfollow={unfollow} />
             )}
         </div>
     );
